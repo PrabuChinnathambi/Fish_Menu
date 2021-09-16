@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import NavbarNew from '../../Navbarnew/NavbarNew';
 import './AdminItems.css';
 import Axios from 'axios';
+import OpenPage from '../../OpenPage/OpenPage';
 
 
 
@@ -14,6 +14,18 @@ function AdminItems() {
     const [update, setUpdate] = useState(false);
     const [updateId, setUpdateId] = useState("");
     const [products, SetProducts] = useState([])
+
+    let store = localStorage.getItem("token");
+
+    Axios.interceptors.request.use(
+        config => {
+            config.headers.Authorization = store;
+            return config;
+        },
+        error => {
+            return Promise.reject(error);
+        }
+    )
 
 
     useEffect(() => {
@@ -104,7 +116,7 @@ function AdminItems() {
     }
 
     const updatenewProduct = () => {
-        
+
         const payload = {
             id: updateId,
             productName: productName,
@@ -122,12 +134,12 @@ function AdminItems() {
 
 
 
-    
+
 
     return (
         <div className="adminItems_page">
             <div>
-                <NavbarNew />
+                <OpenPage />
             </div>
             <div className="adminItems_container">
                 <div className="add_product">
@@ -147,12 +159,12 @@ function AdminItems() {
                                     <input type="text" id="name" value={quantity} onChange={(e) => { SetQuantity(e.target.value) }} />
 
                                     {
-                                        update ? "":
-                                        <label className="file">
-                                            <input type="file" id="file" aria-label="File browser example" encType="multipart/form-data"
-                                                required onChange={handleFileRead} />
-                                            <span className="file-custom"></span>
-                                        </label>
+                                        update ? "" :
+                                            <label className="file">
+                                                <input type="file" id="file" aria-label="File browser example" encType="multipart/form-data"
+                                                    required onChange={handleFileRead} />
+                                                <span className="file-custom"></span>
+                                            </label>
 
                                     }
 

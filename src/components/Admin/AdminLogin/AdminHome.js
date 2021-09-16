@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import NavbarNew from '../../Navbarnew/NavbarNew';
 import './AdminHome.css';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import OpenPage from '../../OpenPage/OpenPage';
 
 
 function AdminHome() {
@@ -32,7 +32,7 @@ function AdminHome() {
     return (
         <div>
             <div>
-                <NavbarNew />
+                <OpenPage />
             </div>
             <div>
                 <div className="login-wrap">
